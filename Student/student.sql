@@ -1,0 +1,37 @@
+Create database student;
+USE student;
+
+
+CREATE TABLE STUDENT (
+    stdid INT,            
+    stdname VARCHAR(20),    
+    dob DATE,                 
+    doj DATE,                 
+    fee INT,                
+    gender CHAR(1)
+);
+
+desc STUDENT;
+INSERT INTO STUDENT (stdid, stdname,dob,doj,fee,gender)
+VALUES(1,'Arambha', '2005-05-10','2025-09-18', 10000, 'M');
+
+INSERT INTO STUDENT (stdid,stdname,dob,doj,fee,gender)
+VALUES(2,'RAHUL','2000-09-05','2025-09-18',11000,'M');
+
+ALTER TABLE STUDENT ADD PHONE_NO VARCHAR(15);
+ALTER TABLE STUDENT
+RENAME COLUMN PHONE_NO TO STUDDENT_NO;
+
+ALTER TABLE STUDENT RENAME TO STUDENT_INFO;
+SELECT * FROM STUDENT;
+
+SHOW TABLES;
+ALTER TABLE student DROP COLUMN gender;
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM STUDENT_INFO WHERE STDID = 2;
+SELECT * FROM STUDENT_INFO;
+SHOW TABLES;
+
+UPDATE STUDENT_INFO
+SET STUDDENT_NO = '1234567890'
+WHERE stdid = 1;
