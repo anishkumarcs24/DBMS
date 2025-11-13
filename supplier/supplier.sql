@@ -1,7 +1,6 @@
 CREATE DATABASE SupplierPartsDB;
 USE SupplierPartsDB;
 
--- 2️⃣ Create Tables
 CREATE TABLE Supplier (
     sid INT PRIMARY KEY,
     sname VARCHAR(50),
@@ -23,7 +22,6 @@ CREATE TABLE Catalog (
     FOREIGN KEY (pid) REFERENCES Parts(pid)
 );
 
--- 3️⃣ Insert Data
 INSERT INTO Supplier VALUES
 (10001, 'Acme Widget', 'Bangalore'),
 (10002, 'Johns', 'Kolkata'),
@@ -49,14 +47,10 @@ INSERT INTO Catalog VALUES
 (10003, 20003, 30),
 (10004, 20003, 40);
 
--- 4️⃣ Queries
-
--- Q3. Find the pnames of parts for which there is some supplier.
 SELECT DISTINCT pname
 FROM Parts p
 WHERE p.pid IN (SELECT pid FROM Catalog);
 
--- Q4. Find the snames of suppliers who supply every part.
 SELECT s.sname
 FROM Supplier s
 WHERE NOT EXISTS (
@@ -69,7 +63,6 @@ WHERE NOT EXISTS (
     )
 );
 
--- Q5. Find the snames of suppliers who supply every red part.
 SELECT s.sname
 FROM Supplier s
 WHERE NOT EXISTS (
@@ -83,7 +76,6 @@ WHERE NOT EXISTS (
     )
 );
 
--- Q6. Find the pnames of parts supplied by Acme Widget Suppliers and by no one else.
 SELECT p.pname
 FROM Parts p
 WHERE p.pid IN (
@@ -99,7 +91,6 @@ AND p.pid NOT IN (
     WHERE s.sname <> 'Acme Widget'
 );
 
--- Q7. Find the sids of suppliers who charge more for some part than the average cost of that part.
 SELECT DISTINCT c1.sid
 FROM Catalog c1
 WHERE c1.cost > (
@@ -108,7 +99,7 @@ WHERE c1.cost > (
     WHERE c2.pid = c1.pid
 );
 
--- Q8. For each part, find the sname of the supplier who charges the most for that part.
+
 SELECT p.pname, s.sname, c.cost
 FROM Catalog c
 JOIN Supplier s ON c.sid = s.sid
